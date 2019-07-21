@@ -15,7 +15,7 @@
 <script>
 import Geo from './geo.vue'
 import User from './user.vue'
-import Navbar from './nav'
+import Navbar from './nav' 
 export default {
   components: {
     Geo,

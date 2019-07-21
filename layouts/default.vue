@@ -1,15 +1,15 @@
 <template>
-  <el-row class="layout-default">
-    <el-col>
-      <my-header />
-    </el-col>
-    <el-col>
-      <nuxt />
-    </el-col>
-    <el-col>
-      <my-footer />123
-    </el-col>
-  </el-row>
+  <el-container class="layout-default">
+    <el-header height="197px">
+      <my-header/>
+    </el-header>
+    <el-main>
+      <nuxt/>
+    </el-main>
+    <el-footer height="100%">
+      <my-footer/>
+    </el-footer>
+  </el-container>
 </template>
 
 <script>
@@ -17,10 +17,10 @@ import MyHeader from '../components/public/header/index.vue'
 import MyFooter from '../components/public/footer/index.vue'
 export default {
   components: {
-    MyHeader
+    MyHeader,
+    MyFooter
   }
 }
 </script>
 <style lang="scss" scope>
-
 </style>
