@@ -11,7 +11,7 @@ const UserSchema = new Schema({
     require: true,
   },
   email: {
-    type: String,
+    type: String, 
     require: true
   }
 })
