@@ -2,12 +2,40 @@ import Koa from 'koa'
 import consola from 'consola'
 import { Nuxt, Builder } from 'nuxt'
 
+import bodyParser from 'koa-bodyparser'
+//帮助操作session的中间件 
+import session from 'koa-generic-session'
+import Redis from 'koa-redis'
+//解决服务端向客户端发送json数据美观可视化效果
+import json from 'koa-json'
+import dbConfig from './dbs/config.js'
+import passport from './interface/utils/passport.js'
+import users from './interface/users.js'
 const app = new Koa()
 
 // Import and Set Nuxt.js options
 import config from '../nuxt.config.js'
+import mongoose from 'mongoose';
 config.dev = !(app.env === 'production')
 
+app.keys = ['mt', 'keyskeys']
+app.proxy = true
+app.use(session({
+  key: 'mt',
+  prefix: 'mt:uid',
+  store: new Redis()
+}))
+app.use(bodyParser({
+  extendTypes: ['json', 'form', 'text']
+}))
+app.use(json())
+mongoose.connect(dbConfig.dbs, {
+  userNewUrlParser: true
+})
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.use(users.routes()).use(users.allowedMethods())
 async function start() {
   // Instantiate nuxt.js
   const nuxt = new Nuxt(config)
@@ -38,5 +66,4 @@ async function start() {
     badge: true
   })
 }
-
 start()
