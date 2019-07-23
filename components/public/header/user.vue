@@ -1,6 +1,6 @@
 <template>
   <div class="m-user">
-    <template v-if="!user">     
+    <template v-if="user">     
       欢迎您, <span>{{ user }}</span>
       <nuxt-link to="/exit">退出</nuxt-link>
     </template>
@@ -20,6 +20,17 @@ export default {
   data () {
     return {
       user: '',
+    }
+  },
+  methods: {
+    exit () {
+      
+    }
+  },
+  async mounted(){
+    const {status, data:{ user }} = await this.$axios.get('/users/getUser');
+    if(status === 200) {
+      this.user = user;
     }
   }
 }

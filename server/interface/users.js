@@ -87,30 +87,28 @@ router.post('/signup', async (ctx)=>{
 })
 
 router.post('/signin', async (ctx, next)=>{
-  return Passport.authenticate('local', function(err, user, info, status){
-    console.log('user------')
-    console.log(user)
-    console.log('err---',err)
-    console.log('info---',info)
-    if (err) {
+  return Passport.authenticate("local", function(err, user, info, status){
+    if(err) {
       ctx.body = {
         code: -1,
         msg: err
       }
     } else {
-      if (user) {
+      if(user) {
+        console.log('user--------',user)
         ctx.body = {
           code: 0,
-          msg: '登录成功',
-          user
+          msg: "登录成功",
+          user: user
         }
+        //触发passport的序列化 存储到session中
         return ctx.login(user)
       } else {
         ctx.body = {
           code: 1,
           msg: info
         }
-      } 
+      }
     }
   })(ctx, next)
 })
@@ -181,7 +179,8 @@ router.get('/exit', async (ctx,next)=>{
   }
 })
 
-router.get('getUser', async (ctx) => {
+//router.get() 路由路径前面的 / 不能去掉 否则成 localhost:3000/usersgetUser
+router.get('/getUser', async (ctx) => {
   if (ctx.isAuthenticated()) {
     const {username, email} = ctx.session.passport.user
     ctx.body = {

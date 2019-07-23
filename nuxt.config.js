@@ -57,4 +57,9 @@ module.exports = {
     extend(config, ctx) {
     }
   }
+  // ,
+  // server: {
+  //   port: 4000,
+  //   host: '127.0.0.1'
+  // }
 }

@@ -53,22 +53,24 @@ export default {
   },
   methods: {
     login () {
-      let self = this;
-      self.$axios.post('/users/signin', {
+      // let self = this;
+      this.$axios.post('/users/signin', {
         //用于处理中文编码 不处理后台接收到乱码
-        username: window.encodeURIComponent(self.username),
-        password: CryptoJS.MD5(self.password).toString()
-      }).then( (status, data)=>{
-        if (status.status === 200) {
+        username: window.encodeURIComponent(this.username),
+        password: CryptoJS.MD5(this.password).toString()
+      }).then(({status, data})=>{
+        if (status === 200) {
           if (data&&data.code===0) {
             location.href = '/'
           } else {
-            console.log(data)
             self.error = data.msg
           }
         } else {
-          self.error = '注册失败'
+          this.error = '注册失败'
         }
+        setTimeout(()=>{
+          this.error = ""
+        }, 1500)
       })
     }
   }

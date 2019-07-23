@@ -120,7 +120,7 @@ export default {
           username: encodeURIComponent(self.ruleForm.name),
           email: self.ruleForm.email
         }).then(({status, data}) => {
-          console.log(data)
+          console.log('data-----',data)
           if (status === 200 && data && data.code === 0) {
             let count = 60;
             self.statusMsg = `验证码已发送, 剩余${count--}秒`
