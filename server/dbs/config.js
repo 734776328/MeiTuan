@@ -1,5 +1,5 @@
 export default {
-  dbs: 'mongodb://127.0.0.1:27017/mt_users',
+  dbs: 'mongodb://127.0.0.1:27017/meituan_db1',
   redis: {
     get host () {
       return

@@ -59,14 +59,17 @@ export default {
         username: window.encodeURIComponent(this.username),
         password: CryptoJS.MD5(this.password).toString()
       }).then(({status, data})=>{
+        console.log('登录操作')
         if (status === 200) {
+          console.log(data)
           if (data&&data.code===0) {
+            console.log('登录成功')
             location.href = '/'
           } else {
-            self.error = data.msg
+            this.error = data.msg
           }
         } else {
-          this.error = '注册失败'
+          this.error = '登录失败'
         }
         setTimeout(()=>{
           this.error = ""

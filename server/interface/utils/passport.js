@@ -17,13 +17,13 @@ passport.use(new LocalStrategy(async function(username, password, done){
     }
   }
 }))
-
-//序列化和反序列化
+ 
+//序列化和反序列化 在验证用户登录成功之后把用户信息存入session中
 passport.serializeUser( function (user, done) {
   done(null, user)
 })
 
-//反序列化
+//反序列化 在每次请求的时候在session中读取用户对象
 passport.deserializeUser( function (user,done) {
   return done(null, user)
 })

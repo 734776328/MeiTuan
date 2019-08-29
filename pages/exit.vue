@@ -7,6 +7,8 @@
 <script>
 export default {
   layout: 'blank',
+  //为什么用中间件执行退出功能呢？
+  //因为这个时候我们没有任何一个与用户交互的行为去做这个事情 当到达 users/exit这个页面的时候自动执行退出功能 所以用中间件实现 
   middleware: async (ctx) => {
     let { status, data } = await ctx.$axios.get('/users/exit')
     if (status && status === 200 && data && data.code === 0) {

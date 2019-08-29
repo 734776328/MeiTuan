@@ -111,7 +111,6 @@ export default {
       this.$refs['ruleForm'].validateField('email', (valid) => {
         emailPass = valid
       })
-      console.log('123')
       if (!namePass && !emailPass) {
         console.log('11')
         //在nuxt配置文件中以及把 axios挂在 vue 中了
@@ -122,12 +121,14 @@ export default {
         }).then(({status, data}) => {
           console.log('data-----',data)
           if (status === 200 && data && data.code === 0) {
-            let count = 60;
-            self.statusMsg = `验证码已发送, 剩余${count--}秒`
+            let count = 5;
+            // self.statusMsg = `验证码已发送, 剩余${count--}秒`
             self.timerid = setInterval(function(){
-              self.statusMsg=`验证码已发送, 剩余${count--}秒`
+              self.statusMsg=`验证码已发送, 剩余${--count}秒`
               if (count===0) {
                 clearInterval(self.timerid)
+                self.timerid = false
+                self.statusMsg = ''
               }
             }, 1000)
           } else {

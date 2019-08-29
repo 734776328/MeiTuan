@@ -11,6 +11,9 @@ import json from 'koa-json'
 import dbConfig from './dbs/config.js'
 import passport from './interface/utils/passport.js'
 import users from './interface/users.js'
+import geo from './interface/geo.js'
+import search from './interface/search.js'
+
 const app = new Koa()
 
 // Import and Set Nuxt.js options
@@ -36,6 +39,9 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use(users.routes()).use(users.allowedMethods())
+app.use(geo.routes()).use(geo.allowedMethods())
+app.use(search.routes()).use(search.allowedMethods())
+
 async function start() {
   // Instantiate nuxt.js
   const nuxt = new Nuxt(config)

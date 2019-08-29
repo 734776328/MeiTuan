@@ -12,24 +12,16 @@
           <button class="el-button el-button-primary"><i class="el-icon-search"/></button>
           <dl class="hotPlace" v-if="isHotPlace">
             <dt>热门搜索</dt>
-            <dd>火锅</dd>
-            <dd>火锅</dd>
-            <dd>火锅</dd>
-            <dd>火锅</dd>
-            <dd>火锅</dd>
+            <dd v-for="(item, idx) in this.$store.state.home.hotPlace.slice(0,4)" :key="idx">{{item.name}}</dd>
           </dl>
           <dl class="searchList" v-if="isSearchList">
-            <dd>烧烤</dd>
-            <dd>烧烤</dd>
-            <dd>烧烤</dd>
-            <dd>烧烤</dd>
+            <dd v-for="(item, idx) in searchList" :key = idx>
+              {{ item.name }}
+            </dd>
           </dl>
         </div>
         <p class="suggest">
-          <a href="#">工故宫博物院</a>
-          <a href="#">工故宫博物院</a>
-          <a href="#">工故宫博物院</a>
-          <a href="#">工故宫博物院</a>
+          <a href="#" v-for="(item, idx) in this.$store.state.home.hotPlace" :key="idx">{{item.name}}</a>
         </p>
         <ul class="nav">
           <li>
@@ -74,6 +66,7 @@
   
 <script>
 import { setTimeout } from 'timers';
+import _ from 'lodash'
 export default {
   data () {
     return {
@@ -100,9 +93,16 @@ export default {
         this.isFocus = false
       },200)
     },
-    input () {
-      console.log('获取数据')
-    }
+    //自动匹配与搜索框相匹配的内容
+    input: _.debounce( async function () {
+      let {status, data: {top}} = await this.$axios.get(`/search/top`, {
+        params: {
+          input: this.search,
+          city: this.$store.state.geo.position.city.replace('市', '')
+        }
+      })
+      this.searchList = top.slice(0,10)
+    }, 200)
   }
 }
 </script>

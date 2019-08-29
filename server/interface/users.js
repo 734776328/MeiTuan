@@ -12,7 +12,10 @@ let router = new Router({
 
 let Store = new Redis().client
 
+
+//-----------------注 册------------------
 router.post('/signup', async (ctx)=>{
+
   const {
     username,
     password,
@@ -86,6 +89,7 @@ router.post('/signup', async (ctx)=>{
   }
 })
 
+//----------------登 录--------------------
 router.post('/signin', async (ctx, next)=>{
   return Passport.authenticate("local", function(err, user, info, status){
     if(err) {
@@ -94,8 +98,8 @@ router.post('/signin', async (ctx, next)=>{
         msg: err
       }
     } else {
+      console.log('user',user)
       if(user) {
-        console.log('user--------',user)
         ctx.body = {
           code: 0,
           msg: "登录成功",
@@ -113,20 +117,19 @@ router.post('/signin', async (ctx, next)=>{
   })(ctx, next)
 })
 
+//-----------------验证验证码-------------------
 router.post('/verify', async (ctx, next) => {
   let username = ctx.request.body.username
   const saveExpire = await Store.hget(`nodemail:${username}`, 'expire')
   if (saveExpire && new Date().getTime() - saveExpire <0) {
-    console.log(new Date(saveExpire))
-    console.log(saveExpire)
-    console.log(new Date().getTime())
+
     ctx.body = {
       code: -1,
       msg: '验证请求过于频繁'
     }
     return false
   }
-  //发送方
+  //发送的对象
   let transporter = nodeMailer.createTransport({
     host: Email.smtp.host,
     port: 587,
@@ -166,6 +169,7 @@ router.post('/verify', async (ctx, next) => {
   }
 })
 
+//----------------退 出-------------------
 router.get('/exit', async (ctx,next)=>{
   await ctx.logout()
   if (!ctx.isAuthenticated()) {
