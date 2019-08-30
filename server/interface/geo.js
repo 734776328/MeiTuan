@@ -70,4 +70,21 @@ router.get('/province/:id',async (ctx) => {
     city: status===200? city: []
   }
 })
+
+//获取全国城市数据
+router.get('/city', async (ctx) => {
+  const {status, data: {city}} = await axios.get(`http://cp-tools.cn/geo/city`)
+  console.log(city)
+  ctx.body = {
+    city: status===200?city:[]
+  }
+})
+
+//获取热门城市
+router.get('/hotCity', async (ctx) => {
+  const {status, data: {hots}} = await axios.get(`http://cp-tools.cn/geo/hotCity?sign=${sign}`)
+  ctx.body = {
+    hots: status===200? hots: []
+  }
+})
 export default router
