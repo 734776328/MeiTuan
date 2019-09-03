@@ -12,11 +12,17 @@
           <button class="el-button el-button-primary"><i class="el-icon-search"/></button>
           <dl class="hotPlace" v-if="isHotPlace">
             <dt>热门搜索</dt>
-            <dd v-for="(item, idx) in this.$store.state.home.hotPlace.slice(0,4)" :key="idx">{{item.name}}</dd>
+            <dd v-for="(item, idx) in this.$store.state.home.hotPlace.slice(0,4)" :key="idx">
+              <a :href="'/products?keyword='+encodeURIComponent(item.name)">
+                {{ item.name +'test'}}
+              </a>
+            </dd>
           </dl>
           <dl class="searchList" v-if="isSearchList">
             <dd v-for="(item, idx) in searchList" :key = idx>
-              {{ item.name }}
+              <a :href="'/products?keyword='+encodeURIComponent(item.name)">
+                {{ item.name+'test' }}
+              </a>
             </dd>
           </dl>
         </div>

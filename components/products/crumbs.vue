@@ -1,11 +1,11 @@
 <template>
   <div class="m-crumbs">
     <el-breadcrumb >
-      <el-breakcrumb-item 
+      <el-breadcrumb-item 
       :to="{path: '/'}"
       >
         {{$store.state.geo.position.city.replace('市','')}}美团
-      </el-breakcrumb-item>
+      </el-breadcrumb-item>
       <el-breadcrumb-item>
         <a href="/">
           {{ $store.state.geo.position.city.replace('市','')}}
