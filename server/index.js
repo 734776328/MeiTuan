@@ -13,6 +13,7 @@ import passport from './interface/utils/passport.js'
 import users from './interface/users.js'
 import geo from './interface/geo.js'
 import search from './interface/search.js'
+import categroy from './interface/categroy.js'
 
 const app = new Koa()
 
@@ -41,6 +42,7 @@ app.use(passport.session())
 app.use(users.routes()).use(users.allowedMethods())
 app.use(geo.routes()).use(geo.allowedMethods())
 app.use(search.routes()).use(search.allowedMethods())
+app.use(categroy.routes()).use(categroy.allowedMethods())
 
 async function start() {
   // Instantiate nuxt.js

@@ -14,20 +14,22 @@
             <dt>热门搜索</dt>
             <dd v-for="(item, idx) in this.$store.state.home.hotPlace.slice(0,4)" :key="idx">
               <a :href="'/products?keyword='+encodeURIComponent(item.name)">
-                {{ item.name +'test'}}
+                {{ item.name }}
               </a>
             </dd>
           </dl>
           <dl class="searchList" v-if="isSearchList">
             <dd v-for="(item, idx) in searchList" :key = idx>
               <a :href="'/products?keyword='+encodeURIComponent(item.name)">
-                {{ item.name+'test' }}
+                {{ item.name }}
               </a>
             </dd>
           </dl>
         </div>
         <p class="suggest">
-          <a href="#" v-for="(item, idx) in this.$store.state.home.hotPlace" :key="idx">{{item.name}}</a>
+          <a :href="'/products?keyword='+encodeURIComponent(item.name)" v-for="(item, idx) in this.$store.state.home.hotPlace" :key="idx">
+            {{item.name}}
+          </a>
         </p>
         <ul class="nav">
           <li>
@@ -97,7 +99,7 @@ export default {
     blurFocus: function () {
       setTimeout( ()=> {
         this.isFocus = false
-      },200)
+      },300)
     },
     //自动匹配与搜索框相匹配的内容
     input: _.debounce( async function () {

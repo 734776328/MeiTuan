@@ -33,14 +33,17 @@ export default {
     }
   },
   async asyncData (ctx) {
-    let keyword = encodeURIComponent(ctx.query.keyword)
-    let city = encodeURIComponent(ctx.store.state.geo.position.city)
+    let keyword = ctx.query.keyword
+    let city = ctx.store.state.geo.position.city.replace('市','')
+    console.log('keywordkeywordkeyword',keyword)
+    console.log('citycitycitycitycity',city)
     let {status, data: {count, pois}} = await ctx.$axios.get('/search/resultsByKeywords',{
       params: {
         keyword,
         city
       }
     })
+    console.log('statusstatusstatus',status)
     let {status: status2, data: {areas, types}} = await ctx.$axios.get('/categroy/crumbs',{
       params: {
         city
@@ -49,7 +52,7 @@ export default {
 
     if(status===200&&count>0&&status2===200){
       return {
-        list: posi.filter(item=>item.photos.length).map(item=>{
+        list: pois.filter(item=>item.photos.length).map(item=>{
           return {
             type: item.type,
             img: item.photos[0].url,
@@ -73,6 +76,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import "@/assets/css/products/index.scss";
 </style>
