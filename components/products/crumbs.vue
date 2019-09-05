@@ -1,6 +1,6 @@
 <template>
   <div class="m-crumbs">
-    <el-breadcrumb >
+    <el-breadcrumb separator=">">
       <el-breadcrumb-item 
       :to="{path: '/'}"
       >

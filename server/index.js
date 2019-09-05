@@ -14,6 +14,7 @@ import users from './interface/users.js'
 import geo from './interface/geo.js'
 import search from './interface/search.js'
 import categroy from './interface/categroy.js'
+import cart from './interface/cart.js'
 
 const app = new Koa()
 
@@ -43,7 +44,7 @@ app.use(users.routes()).use(users.allowedMethods())
 app.use(geo.routes()).use(geo.allowedMethods())
 app.use(search.routes()).use(search.allowedMethods())
 app.use(categroy.routes()).use(categroy.allowedMethods())
-
+app.use(cart.routes()).use(cart.allowedMethods())
 async function start() {
   // Instantiate nuxt.js
   const nuxt = new Nuxt(config)

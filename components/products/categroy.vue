@@ -36,7 +36,11 @@ export default {
         return []
       }
     }
-  }
+  },
+  mounted() {
+    console.log(this.areas)
+    console.log(this.types)
+  },
 }
 </script>
 

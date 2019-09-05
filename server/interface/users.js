@@ -98,12 +98,11 @@ router.post('/signin', async (ctx, next)=>{
         msg: err
       }
     } else {
-      console.log('user',user)
       if(user) {
         ctx.body = {
           code: 0,
           msg: "登录成功",
-          user: user
+          user
         }
         //触发passport的序列化 存储到session中
         return ctx.login(user)
