@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-const Schema = new mongoose.Schema
+const Schema = mongoose.Schema
 
 const Order = new Schema({
   id: {
@@ -20,7 +20,7 @@ const Order = new Schema({
     requier: true
   },
   imgs: {
-    type: Array,
+    type: String,
     require: true
   },
   name: {

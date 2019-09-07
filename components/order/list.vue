@@ -1,19 +1,19 @@
 <template>
   <div class="m-order">
     <ul>
-      <li v-if="cur.length">
+      <li v-if="cur">
         <el-row v-for="(item,idx) in cur" :key="idx">
           <el-col :span="4">
             <img :src="item.img" alt="">
           </el-col>
-          <el-col :span="4">
+          <el-col :span="11">
             <h4>{{ item.name }}</h4>
             <p>数量：{{ item.count }}</p>
           </el-col>
           <el-col :span="4">
             总价： ￥{{ item.total }}
           </el-col>
-          <el-col :span="6">
+          <el-col :span="5">
             {{ item.statusTxt }}
           </el-col>
         </el-row>
@@ -32,7 +32,10 @@ export default {
         return []
       }
     }
-  }
+  },
+  mounted() {
+    console.log(this.cur)
+  },
 }
 </script>
 

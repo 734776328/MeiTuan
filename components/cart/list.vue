@@ -34,15 +34,17 @@
   
 <script>
 export default {
-  data () {
-    return {
-      cartData: [{
-        name: '王小虎',
-        price: 180,
-        count:3
-      }]
+  props: {
+    cartData: {
+      type: Array,
+      default: () => {
+        return []
+      }
     }
-  }
+  },
+  mounted() {
+    console.log('cartDatacartData',this.cartData)
+  },
 }
 </script>
 <style scoped="scss">

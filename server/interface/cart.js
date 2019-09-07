@@ -27,6 +27,8 @@ router.post('/create',async (ctx) => {
       }
     } = ctx.request.body
 
+    //解决数据矛盾问题 detail[0].imgs 数组中元素 title 类型不一致 导致mongodb创建集合失败
+    detail.imgs = detail.imgs.filter(item => typeof item.title === 'string')
     let cart = new Cart({
       id,
       //购物车创建时间
@@ -36,7 +38,7 @@ router.post('/create',async (ctx) => {
       user: ctx.session.passport.user,
       detail
     })
-    
+    console.log('cartcartcartcartcartcart', cart)
     let result = await cart.save()
     console.log('await cart.save()',result)
 
