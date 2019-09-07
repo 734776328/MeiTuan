@@ -10,6 +10,7 @@ let router = new Router({
 
 //创建购物车
 router.post('/create',async (ctx) => {
+
   if (!ctx.isAuthenticated()) {
     ctx.body = {
       code: -1,
@@ -25,21 +26,25 @@ router.post('/create',async (ctx) => {
         detail
       }
     } = ctx.request.body
+
     let cart = new Cart({
       id,
       //购物车创建时间
-      carNo,
+      cartNo,
       time,
       //获取session中的用户信息
       user: ctx.session.passport.user,
       detail
     })
+    
     let result = await cart.save()
+    console.log('await cart.save()',result)
+
     if (result) {
       ctx.body = {
         code: 0,
         msg: '',
-        id: carNo
+        id: cartNo
       }
     } else {
       ctx.body = {
@@ -52,13 +57,18 @@ router.post('/create',async (ctx) => {
 })
 
 //获取购物车信息
-router.get('/getCart', async (ctx)=>{
-  let {id} = ctx.rquest.body
+router.post('/getCart', async (ctx)=>{
+
+  let {id} = ctx.request.body
+
   try {
-    let result = await Cart.findOne({CartNo: id})
-    ctx.body = {
-      code: 0,
-      data: result? result.detail[0] : {}
+    let result = await Cart.findOne({cartNo: id})
+    console.log('Cart.findOne({CartNo: id}',result)
+    if(result) {
+      ctx.body = {
+        code: 0,
+        data: result? result.detail[0] : {}
+      }
     }
   } catch (e) {
     ctx.body = {

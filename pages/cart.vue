@@ -48,21 +48,21 @@ export default {
   },
   async asyncData (ctx) {
     // 服务器根据传入的 id （随机生成的字符串）参数去数据库中查找购物车数据并返回
-    let {status, data: {code, data:{name,price}}} = await ctx.$axios.post('/cart/getCar',{
+    let {status, data: {code, data:{name,price,}}} = await ctx.$axios.post('/cart/getCart',{
       id: ctx.query.id
     })
-    if (status===200&&code&&name) {
-      //nuxtjs 的 async 方法返回值就是请求的返回数据(前端请求的数据))
+    if (status===200&&code===0) {
       return {
         cart: [{
           name,
           price,
-          count: 1,
+          count: 1
         }],
         cartNo: ctx.query.id
       }
     }
-  }
+  },
+
 }
 </script>
 <style scoped="scss">

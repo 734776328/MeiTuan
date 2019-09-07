@@ -74,5 +74,7 @@ async function start() {
     message: `Server listening on http://${host}:${port}`,
     badge: true
   })
+
+  
 }
 start()
