@@ -1,22 +1,19 @@
-# mt-app
+## 仿PC美团官网
 
-> My gnarly Nuxt.js project
+### 主要技术栈
+- Vue
+- Vuex 
+- koa
+- koa-router
+- node
+- nuxtjs
+- mongodb
+- redis
+- element-ui
 
-## Build Setup
-
-``` bash
-# install dependencies
-$ npm run install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+### 以及一些核心库依赖
+- passport
+- crypto-js
+- lodash
+- mongoose
+- koa-redis

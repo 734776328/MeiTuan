@@ -4,7 +4,6 @@ import Province from '../dbs/models/province'
 
 let router = new Router({prefix: '/categroy'})
 
-const sign = 'asdf'
 
 router.get('/crumbs', async (ctx)=> {
   let {status, data: {areas,types}} = await axios.get(`http://cp-tools.cn/categroy/crumbs`,{

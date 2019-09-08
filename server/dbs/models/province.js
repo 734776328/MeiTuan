@@ -6,10 +6,13 @@ const Province = new Schema({
     type: String,
     require: ''
   },
-  value: {
-    type: Array,
+  name: {
+    type: String,
     require: true
   }
+},{
+  //不往数据里添加版本号属性 __v:0
+  versionKey: false
 })
 
 export default mongoose.model('Province', Province)
