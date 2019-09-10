@@ -3,6 +3,7 @@ import axios from './utils/axios.js';
 import Province from '../dbs/models/province.js'
 import Menus from '../dbs/models/menus.js'
 import Cities from '../dbs/models/cities.js'
+import HotCitys from '../dbs/models/hotCitys.js'
 
 let router = new Router({
   prefix: '/geo'
@@ -32,16 +33,6 @@ router.get('/getPosition', async (ctx) => {
 router.get('/menu', async (ctx) => {
   // //获取线上数据
   // let {status, data: {menu}} = await axios.get(`http://cp-tools.cn/geo/menu?sign=${sign}`)
-  // //把数据返回给客户端
-  // if (status===200) {
-  //   ctx.body = {
-  //     menu
-  //   }
-  // } else {
-  //   ctx.body = {
-  //     menu: []
-  //   }
-  // }
 
   // mongodb数据库获取菜单
   let result = await Menus.find()
@@ -49,77 +40,39 @@ router.get('/menu', async (ctx) => {
   ctx.body = {menu: menu.length>0? menu:[]}
 })
 
-// 1. 获取城市列表    本地数据库数据
-// router.get('/province', async (ctx) => {
-//   let province = await Province.find()
-//   console.log('数据库全部城市信息-----',province)
-//   ctx.body = {
-//     province: province.map( item => {
-//       return {
-//         id: item.id,
-//         name: item.value[0]
-//       }
-//     })
-//   }
-// })
+// 2. 获取全国省数据
 
-// 2. 线上全国省数据
-router.get('/Province', async (ctx) => {
+
+router.get('/province', async (ctx) => {
   // let {status, data: {province}} = await axios.get(`http://cp-tools.cn/geo/province?sign=${sign}`)
-  // ctx.body = {province:  status===200? province: []}
 
   //数据库获取
+  const result = await Province.find()
+  ctx.body = {
+    province: result
+  }
 
 })
-
-//存储全国省数据
-// router.get('/quanshen', async (ctx)=> {
-//   const {data:{province}} = await axios.get('http://cp-tools.cn/geo/province')
-//   console.log('provinceprovinceprovince',province)
-//   Province.insertMany(province,(err,docs)=>{
-//     if(err) console.log(err)
-//     console.log(docs)
-//   })
-// })
 
 //3. 获取市数据
-
+// 根据传送过来的省ID去城市数据库中查找城市数据 mongodb模糊查询使用的是正则表达式
 router.get('/province/:id',async (ctx) => {
   // const {status, data: {city}} = await axios.get(`http://cp-tools.cn/geo/province/${ctx.params.id}`)
-  // ctx.body = {
-  //   city: status===200? city: []
-  // }
-  const result = await Province.find({id: ctx.params.id})
-  console.log(result)
-  ctx.body = {city: result.length>0? result:[]}
-
+  //正则表达式注意事项 不能带单引号'' 双引号""" 在nodejs中必须使用 new RegExp()构建正则表达式 RegExp() 中添加变量跟字符串中合并变量一样
+  const cityID = new RegExp("^"+ctx.params.id.substring(0,2))
+  const cities = await Cities.find({id: cityID})
+  // 下面语句为什么返回的是 []
+  // ctx.body = {city: cities.length>0? cities:[]}
+  console.log('city: cities.length',cities.length);
+  ctx.body = {city:cities}
 })
 
-
-//4导入全国城市线上数据
-router.get('/importCits', async (ctx)=>{
-  const {data:{city}} = await axios.get('http://cp-tools.cn/geo/city')
-  console.log(city)
-  Cities.insertMany(city, (err,docs)=>{
-    if(err) console.log(err)
-    ctx.body = {
-      city
-    }
-  })
-  // Province.insertMany(province,(err,docs)=>{
-  //   if(err) console.log(err)
-  //   console.log(docs)
-  // })
-})
 
 //4. 获取全国城市数据
+
 router.get('/city', async (ctx) => {
   // const {status, data: {city}} = await axios.get(`http://cp-tools.cn/geo/city`)
-  // ctx.body = {
-  //   city: status===200?city:[]
-  // }
-  const result = Cities.find()
-  console.log(result)
+  const result = await Cities.find()
   if (result.length>0) {
     ctx.body = {
       code: 1,
@@ -133,11 +86,22 @@ router.get('/city', async (ctx) => {
   }
 })
 
-//获取热门城市
+//5获取热门城市
+
 router.get('/hotCity', async (ctx) => {
-  const {status, data: {hots}} = await axios.get(`http://cp-tools.cn/geo/hotCity?sign=${sign}`)
-  ctx.body = {
-    hots: status===200? hots: []
-  }
+  // const {status, data: {hots}} = await axios.get(`http://cp-tools.cn/geo/hotCity?sign=${sign}`)
+  const hotCitys = await HotCitys.find()
+  if (hotCitys.length>0) {
+    ctx.body = {
+      code: 1,
+      hots: hotCitys
+    }
+  } else {
+    ctx.body = {
+      code: 1,
+      host: []
+    }
+  }  
+  
 })
 export default router

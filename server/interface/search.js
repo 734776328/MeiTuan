@@ -1,6 +1,5 @@
 import Router from 'koa-router'
 import axios from './utils/axios'
-import Poi from '../dbs/models/poi.js'
 let router = new Router({
   prefix: '/search'
 })
@@ -20,6 +19,8 @@ router.get('/top', async (ctx) => {
     top: status===200? top: []
   }
 })
+
+//2. 热门城市经典
 
 router.get('/hotPlace', async (ctx) => {
   let city = ctx.query.city

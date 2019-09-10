@@ -8,7 +8,6 @@ let router = new Router({prefix: '/order'})
 
 // 创建订单
 router.post('/createOrder', async (ctx)=>{
-  console.log('===========================================================')
   let {id, price, count} = ctx.request.body
   let time = Date()
   let orderID = md5(Math.random() * 1000 + time).toString()
@@ -53,7 +52,6 @@ router.post('/createOrder', async (ctx)=>{
 })
 //查看所有订单
 router.post('/getOrders',async (ctx) => {
-  console.log('================================================================================================')
   if(!ctx.isAuthenticated()) {
     ctx.body = {
       code: -1,
@@ -65,7 +63,6 @@ router.post('/getOrders',async (ctx) => {
       //我们此处没有进行分页查询
       // let result = await Order.find().limit(15)
       let result = await Order.find()
-      console.log('result result result result ', result)
       if(result){
         ctx.body={
           code: 0,

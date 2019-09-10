@@ -75,6 +75,7 @@ router.post('/signup', async (ctx)=>{
         msg: '注册成功',
         user: res.data.user
       }
+      location('/')
     } else {
       ctx.bodu = {
         code: -1,
@@ -158,7 +159,7 @@ router.post('/verify', async (ctx, next) => {
     if (error) {
       return console.log(error)
     } else {
-      Store.hmset(`nodemail:${ko.user}`,'code',ko.code, 'expire', ko.expire, 'email', 'ko.email')
+      Store.hmset(`nodemail:${ko.user}`,'code',ko.code, 'expire', ko.expire, 'email', ko.email)
     }
   })
 

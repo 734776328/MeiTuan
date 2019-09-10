@@ -38,7 +38,6 @@ router.post('/create',async (ctx) => {
       user: ctx.session.passport.user,
       detail
     })
-    console.log('cartcartcartcartcartcart', cart)
     let result = await cart.save()
     console.log('await cart.save()',result)
 

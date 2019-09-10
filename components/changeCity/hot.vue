@@ -16,7 +16,7 @@ export default {
   },
   async mounted() {
     const {status, data: {hots}} = await this.$axios.get('geo/hotCity')
-    this.list = status===200? hots:[]
+    this.list = status ===200? hots:[]
   },
 }
 </script>

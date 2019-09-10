@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
-const Cities = new Schema({
-  id:{
+const hotCity = new Schema({
+  province: {
     type: String,
     require: true
   },
@@ -9,10 +9,12 @@ const Cities = new Schema({
     type: String,
     require: true
   },
-  province: {
+  id: {
     type: String,
-    require
+    require: true
   }
-},{versionKey: false})
+},{
+  versionKey: false
+})
 
-export default mongoose.model('Cities',Cities)
+export default mongoose.model('hotCity',hotCity)

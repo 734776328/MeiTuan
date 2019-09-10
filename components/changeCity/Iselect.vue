@@ -73,8 +73,10 @@ export default {
   watch: {
     //当省份改变时 改变城市列表
     pvalue: async function (newPvalue) {
+      console.log('省份省份省份省份',this.pvalue)
       let self = this
       let {status, data:{city}} = await self.$axios.get(`/geo/province/${newPvalue}`)
+      console.log(city)
       if(status===200){
         self.city = city.map(item=>{
           return {
@@ -88,10 +90,12 @@ export default {
       
     }
   },
+  //插入页面后获取城市
   async mounted () {
     let self = this
-    let { status, data: {province}} = await self.$axios.get('/geo/province')
+    let {status, data: {province}} = await self.$axios.get('/geo/province')
     if(status === 200){
+      console.log('数据库数据', province)
       self.province = province.map(item=>{
         return {
           value: item.id,
@@ -99,6 +103,7 @@ export default {
         }
       })
     }
+    console.log('self.provinceself.province',self.province)
   }
 }
 </script>

@@ -2,9 +2,11 @@
   <div class="search-panel">
     <el-row class="m-header-searchbar">
       <el-col :span="3" class="left">
-        <img
+        <nuxt-link to="/">
+          <img
             src="//s0.meituan.net/bs/fe-web-meituan/e5eeaef/img/logo.png"
             alt="美团">
+        </nuxt-link>
       </el-col>
       <el-col :span="21" class="center">
         <div class="wrapper">

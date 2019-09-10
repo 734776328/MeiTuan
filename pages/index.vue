@@ -10,7 +10,7 @@
     </el-row>
     <el-row>
       <el-col :span="24">
-        <!-- <Eartistic/> -->
+        <Eartistic/>
       </el-col>
     </el-row>
   </div>
@@ -19,12 +19,12 @@
 <script>
 import Emenu from '@/components/index/Menu.vue' 
 import Elife from '@/components/index/life.vue' 
-// import Eartistic from "@/components/index/artistic.vue"
+import Eartistic from "@/components/index/artistic.vue"
 export default {
   components: {
     Emenu,
     Elife,
-    // Eartistic,
+    Eartistic,
   }
 }
 </script>

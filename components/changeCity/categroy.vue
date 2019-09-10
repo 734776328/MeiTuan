@@ -20,7 +20,7 @@ import pyjs from 'js-pinyin'
 export default {
   data () {
     return {
-      list: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+      list: 'ABCDEFGHJKLMNPQRSTWXYZ'.split(''),
       block: []
     }
   },
