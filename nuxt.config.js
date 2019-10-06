@@ -59,7 +59,7 @@ module.exports = {
   }
   ,
   server: {
-    port: 8000,
+    port: 3000,
     host: '127.0.0.1'
   }
 }

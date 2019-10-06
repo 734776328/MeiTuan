@@ -4,7 +4,7 @@
       <dd
         v-for="item in nav"
         :key="item.name"
-        :class="[item.name,item.active?'s-nav-active':'']"
+        :class="[item.name,sortTarget === item.name?'s-nav-active':'']"
         @click="navSelect"
       >{{item.txt}}</dd>
     </dl>
@@ -56,17 +56,17 @@ export default {
   },
   methods: {
     navSelect(e) {
-      this.sortTarget = e.target.className.split(' ')[0];
-      this.nav.forEach((item)=>{
-        item.active = false;
-        if (item.name === this.sortTarget) {
-          item.active = true;
-        }
-      })
+      this.sortTarget = e.target.className.split(' ').filter((item)=>{
+        return item === 's-default' || item === 's-price' || item === 's-visit' || item === 's-comment'
+      })[0];
     },
     sortArr (tar) {
       this.list.sort((a, b)=>{
-        return b[tar] - a[tar];
+        if (tar === 'price') {
+          return a[tar] - b[tar];  
+        } else {
+          return b[tar] - a[tar];
+        }
       })
     }
   },
@@ -74,7 +74,7 @@ export default {
     'sortTarget': function () {
       switch (this.sortTarget) {
         case 's-default' : 
-          this.sortArr('price');
+          this.sortArr('rate');
           break;
         case 's-price' : 
           this.sortArr('price');
