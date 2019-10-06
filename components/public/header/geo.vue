@@ -4,7 +4,7 @@
     <nuxt-link class="changeCity" to="changeCity">
       切换城市
     </nuxt-link>
-    [茂名 东莞 湛江]
+    [佛山 东莞 深圳]
   </div>
 </template>
   

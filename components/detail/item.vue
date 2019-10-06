@@ -3,24 +3,22 @@
     v-if="meta.photos.length"
     class="m-detail-item">
     <dl class="section">
-      <dd>
+      <dd class="info-left">
         <img
           :src="meta.photos[0].url"
           :alt="meta.photos[0].title">
       </dd>
-      <dd>
+      <dd class="info-right">
         <h4>{{ meta.name }}</h4>
         <p>
           <span v-if="meta.biz_ext&&meta.biz_ext.ticket_ordering">剩余：{{ Number(meta.biz_ext.ticket_ordering) }}</span>
           <span v-if="meta.deadline">截止日期：{{ meta.deadline }}</span>
         </p>
         <p>
-          <span class="price">{{ Number(meta.biz_ext.cost) }}</span>
-          <sub>门店价{{ Number(meta.biz_ext.cost) }}</sub>
+          <span style="color: red;">￥</span><span class="price">{{ Number(meta.biz_ext.cost) }}</span> <span>门店价￥{{ Number(meta.biz_ext.cost) }}</span>
         </p>
-      </dd>
-      <dd>
         <el-button
+          class="im-buy"
           type="warning"
           round
           @click="createCart">立即抢购
@@ -72,4 +70,39 @@
 </script>
 
 <style lang="scss">
+  .m-detail-item {
+    overflow: hidden;
+    position: relative;
+  }
+  .m-detail-item {
+    margin: 10px 0;
+  }
+  .m-detail-item dd {
+    float: left;
+  }
+  .m-detail-item .im-buy{
+    position: absolute;
+    right: 80px;
+    top: 50%;
+    margin-top: -20px;
+  }
+  .m-detail-item .info-left {
+    margin-right: 15px;
+  }
+  .m-detail-item .info-right p:nth-child(2) {
+    margin-top: 34px;
+  }
+  .m-detail-item .info-right span:nth-child(3) {
+    font-size: 13px;
+    color: #999;
+  }
+  .m-detail-item .info-right .price {
+    font-size: 30px;
+    color: red;
+  }
+  .m-detail-item .info-left img {
+    width: 100px;
+    height: 100px;
+  }
+
 </style>

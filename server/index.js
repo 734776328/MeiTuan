@@ -8,6 +8,8 @@ import session from 'koa-generic-session'
 import Redis from 'koa-redis'
 //解决服务端向客户端发送json数据美观可视化效果
 import json from 'koa-json'
+
+
 import dbConfig from './dbs/config.js'
 import passport from './interface/utils/passport.js'
 import users from './interface/users.js'
@@ -32,7 +34,8 @@ app.use(session({
   store: new Redis()
 }))
 app.use(bodyParser({
-  extendTypes: ['json', 'form', 'text']
+  // extendTypes: ['json', 'form', 'text']
+  extendTypes: ['form', 'text']
 }))
 app.use(json())
 mongoose.connect(dbConfig.dbs, {
@@ -47,6 +50,7 @@ app.use(search.routes()).use(search.allowedMethods())
 app.use(categroy.routes()).use(categroy.allowedMethods())
 app.use(cart.routes()).use(cart.allowedMethods())
 app.use(order.routes()).use(order.allowedMethods())
+
 async function start() {
   // Instantiate nuxt.js
   const nuxt = new Nuxt(config)

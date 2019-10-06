@@ -1,7 +1,11 @@
 <template lang="html">
   <div class="m-detail-list">
     <ul>
-      <li>{{ list.filter(item=>item.photos.length).length }}款套餐</li>
+      <li>
+        <h4>
+          {{ list.filter(item=>item.photos.length).length }}款套餐
+        </h4>
+      </li>
       <item
         v-for="(item,idx) in list"
         :key="idx"
@@ -26,3 +30,19 @@ export default {
   },
 }
 </script>
+<style scoped>
+.m-detail-list {
+  background-color: #fff;
+  padding: 10px 0 0 10px;
+} 
+.m-detail-list h4 {
+  font-size: 18px;
+  padding-left: 0;
+  margin-left: 0;
+  font-weight: 600;
+  color: #000;
+}
+.m-detail-list li {
+  list-style-type: none;
+}
+</style>

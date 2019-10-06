@@ -23,4 +23,7 @@ export default {
 }
 </script>
 <style lang="scss" scope>
+.layout-default {
+  width: 100%;
+}
 </style>

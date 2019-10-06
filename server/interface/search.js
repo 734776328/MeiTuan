@@ -50,6 +50,7 @@ router.get('/resultsByKeywords', async (ctx) => {
   }
 })
 
+// 获取产品
 router.get('/products',async (ctx)=> {
   let keyword = ctx.query.keyword || '旅游';
   let city = ctx.query.city || '深圳';

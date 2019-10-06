@@ -2,8 +2,7 @@
   <div class="page-detail">
     <el-row>
       <el-col :span="24">
-        <crumbs
-          />
+        <crumbs/>
       </el-col>
     </el-row>
     <el-row>
@@ -16,7 +15,7 @@
         <h3>商家团购及优惠</h3>
       </el-col>
     </el-row>
-    <el-row v-if="canOrder || !login">
+    <el-row class="shops-info" v-if="canOrder || !login">
       <el-col :span="24">
         <list
           v-if="login"
@@ -25,7 +24,7 @@
           v-else
           class="deal-need-login">
           <img
-            src="//p0.meituan.net/codeman/56a7d5abcb5ce3d90fc91195e5b5856911194.png"
+            src="https://p0.meituan.net/codeman/56a7d5abcb5ce3d90fc91195e5b5856911194.png"
             alt="登录查看">
           <span>请登录后查看详细团购优惠</span>
           <el-button
@@ -86,6 +85,16 @@ export default {
 }
 </script>
 <style scoped="scss">
-@import "@/assets/css/detail/index.scss";
+.page-detail .m-title {
+  margin-top: 35px;
+}
+.page-detail .shops-info {
+  border-radius: 50%;
+}
+.page-detail .m-title h3 {
+  font-size: 20px;
+  color: #000;
+  font-weight: 700px;
+}
 </style>
   

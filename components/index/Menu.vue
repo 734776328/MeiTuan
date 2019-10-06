@@ -20,7 +20,7 @@ import { stringify } from 'querystring';
 export default {
   data () {
     return {
-      kind: '',
+      kind: 'takeout',
       isEnterChild: true,
       menu: this.$store.state.home.menu
     }

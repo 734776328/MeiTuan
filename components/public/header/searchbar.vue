@@ -4,7 +4,7 @@
       <el-col :span="3" class="left">
         <nuxt-link to="/">
           <img
-            src="//s0.meituan.net/bs/fe-web-meituan/e5eeaef/img/logo.png"
+            src="//s0.meituan.net/bs/fe-web-meituan/fa5f0f0/img/logo.png"
             alt="美团">
         </nuxt-link>
       </el-col>
@@ -57,17 +57,6 @@
         :span="6"
         class="right"
       >
-        <ul class="security">
-          <li>
-            <i class="refund"/><p class="txt">随时退</p>
-          </li>
-          <li>
-            <i class="single"/><p class="txt">不满意免单</p>
-          </li>
-          <li>
-            <i class="overdue"/><p class="txt">过期退</p>
-          </li>
-        </ul>
       </el-col>
     </el-row>
   </div>
@@ -88,10 +77,10 @@ export default {
   },
   computed: {
     isHotPlace: function () {
-      return this.isFocus&&!this.search
+      return this.isFocus && !this.search
     },
     isSearchList: function () {
-      return this.isFocus&&this.search
+      return this.isFocus && this.search
     }
   },
   methods: {
@@ -112,10 +101,9 @@ export default {
         }
       })
       this.searchList = top.slice(0,10)
-    }, 200)
+    }, 300)
   }
 }
 </script>
 <style scoped>
-  @import "@/assets/css/public/header/index.scss";  
 </style>

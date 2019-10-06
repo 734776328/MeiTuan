@@ -82,6 +82,7 @@ export default {
           return false
         }
       })
+      console.log(this.list[0])
     },
     list: function() {
       let val = this.name
@@ -108,7 +109,7 @@ export default {
       return {
         list : list.map(item => {
           return {
-            img:item.img,
+            img:item.imgs,
             name:item.name,
             count:1,
             total:item.total,

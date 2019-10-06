@@ -25,7 +25,7 @@ router.post('/createOrder', async (ctx)=>{
       time,
       user: ctx.session.passport.user,
       name: findCart.detail[0].name,
-      imgs: findCart.detail[0].imgs[0].url,
+      imgs: findCart.detail[0].imgs[0] ? findCart.detail[0].imgs[0].url : '',
       status: 0
     })
     try {

@@ -1,7 +1,7 @@
 <template>
   <el-table
     :data="cartData"
-    style="width:980px">
+  >
     <el-table-column
       prop="name"
       label="项目"

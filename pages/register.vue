@@ -21,7 +21,7 @@
         <el-form-item label="邮箱" prop="email">
           <el-input v-model="ruleForm.email"></el-input>
           <el-button size="mini" round @click="sendMsg">发送验证码</el-button>
-          <span class="status">{{ statusMsg}}</span>
+          <span class="status">{{ statusMsg }}</span>
         </el-form-item>
         <el-form-item label="验证码" prop="code">
           <el-input v-model="ruleForm.code" maxlength="4"/>
