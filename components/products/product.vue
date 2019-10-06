@@ -8,13 +8,10 @@
         <nuxt-link :to="{path:'detail',query:{keyword:meta.name,type:meta.module}}">{{ meta.name }}</nuxt-link>
       </h3>
         <el-rate
-          :value="meta.rate*5/100"
+          :value="meta.rate"
           disabled
           show-text>
         </el-rate>
-      <span v-if="meta.rate>4" class="s-item-comment">很好</span>
-      <span v-else-if="meta.rate>3" class="s-item-comment">一般</span>
-      <span v-else class="s-item-comment">很差</span>
       <span class="s-item-value">{{ meta.rate }}分</span>
       <span class="s-item-comment-total">{{ meta.comment }}人评论</span>
       <p>
@@ -27,14 +24,14 @@
       </p>
       <ul>
         <li>
-          <span class="detail-type">门票</span>{{meta.ticket}}
+          <span class="detail-type">门票</span>{{meta.ticket || '暂无描述'}}
         </li>
         <li>
-          <span class="detail-type">跟团</span>{{meta.group}}
+          <span class="detail-type">跟团</span>{{meta.group || '暂无描述'}}
         </li>
         <li v-if="meta.scene&&meta.scene.length">
           <span class="detail-type">景酒</span>
-          {{ meta.scene }}
+          {{ meta.scene || '暂无描述' }}
         </li>
         <li v-else>
           <span class="detail-type">景酒</span>暂无描述

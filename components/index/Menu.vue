@@ -3,7 +3,7 @@
     <dl class="nav" @mouseleave="mouseleave">
       <dt>全部分类</dt>
         <dd v-for="(value,index) in menu" :key="index" @mouseenter="enter">
-          <i :class="value.type"/>{{value.name}}<span class="arrow"/>
+          <i :class="[value.type]"/>{{value.name}}<span class="arrow"/>
         </dd>
     </dl>
     <div class="detail" v-if="kind" @mouseleave="childMenuLeave" @mouseenter="childMenuEnter">
@@ -20,8 +20,8 @@ import { stringify } from 'querystring';
 export default {
   data () {
     return {
-      kind: 'takeout',
-      isEnterChild: true,
+      kind: '',
+      timeoutID: '',
       menu: this.$store.state.home.menu
     }
   },
@@ -39,24 +39,18 @@ export default {
   },
   methods: {
     mouseleave () {
-      let selt=this;
-      selt._time = setTimeout( ()=> {
-        if (!this.isEnterChild) {
-          console.log('2')
-          this.kind = ''
-        }
+      this.timeoutID = setTimeout( ()=> {
+          this.kind = '';
       }, 50)
     },
     enter (e) {
-      this.kind = e.target.querySelector('i').className
-       
+      this.kind = e.target.querySelector('i').className;
     },
     childMenuLeave () {
-      this.isEnterChild = false
-      this.kind = ''
+      this.kind = '';
     },
     childMenuEnter () {
-      this.isEnterChild = true
+      clearTimeout(this.timeoutID);
     }
   },
   mounted() {

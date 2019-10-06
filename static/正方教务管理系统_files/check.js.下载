@@ -1,0 +1,49 @@
+function setCookie(c_name,value)
+			{
+				document.cookie=c_name+ "=" +escape(value);
+			}
+
+			function getCookie(c_name)
+			{
+				if (document.cookie.length>0)
+				{
+					var c_start=document.cookie.indexOf(c_name + "=");
+					if (c_start!=-1)
+					{ 
+						c_start=c_start + c_name.length+1;
+						var c_end=document.cookie.indexOf(";",c_start);
+						if (c_end==-1) c_end=document.cookie.length;
+						return unescape(document.cookie.substring(c_start,c_end));
+					} 
+				}
+				return "";
+			}
+			
+			function checkViewed()//是否访问了当前页面
+			{
+				var timeStamp=parseInt(getCookie('timeStamp'));
+				var txtTimeStamp=parseInt(document.getElementById("txtTimeStamp").value);
+				if(isNaN(timeStamp))//时间戳未设置
+				{
+					setCookie('timeStamp',1);
+					document.getElementById("txtTimeStamp").value=1;
+				}
+				else if(isNaN(txtTimeStamp))//新访问请求
+				{
+					setCookie('timeStamp',parseInt(timeStamp)+1);
+					document.getElementById("txtTimeStamp").value=parseInt(timeStamp)+1;
+				}
+				else if(txtTimeStamp<timeStamp)//存在已访问的请求，踢出旧的请求
+				{
+					window.location.href="error.aspx?err=5";
+				}
+			}
+
+			function checkStart()
+			{
+				window.onload=checkViewed;
+
+				setInterval("checkViewed()",1000);
+			}
+
+			

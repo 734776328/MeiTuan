@@ -50,15 +50,46 @@ export default {
           txt: '评价最高',
           active: false
         }
-      ]
+      ],
+      sortTarget: 's-default',
     }
   },
   methods: {
     navSelect(e) {
-      //   console.log('e', e)
-      this.nav.map(item => (item.active = false))
-      this.nav.find(x => x.name === e.target.className).active = true
+      this.sortTarget = e.target.className.split(' ')[0];
+      this.nav.forEach((item)=>{
+        item.active = false;
+        if (item.name === this.sortTarget) {
+          item.active = true;
+        }
+      })
+    },
+    sortArr (tar) {
+      this.list.sort((a, b)=>{
+        return b[tar] - a[tar];
+      })
     }
-  }
+  },
+  watch: {
+    'sortTarget': function () {
+      switch (this.sortTarget) {
+        case 's-default' : 
+          this.sortArr('price');
+          break;
+        case 's-price' : 
+          this.sortArr('price');
+          break;
+        case 's-visit' : 
+          this.sortArr('rate');
+          break;
+        case 's-comment' : 
+          this.sortArr('comment');
+          break; 
+      }
+    }
+  },
+  mounted() {
+    console.log(this.list)
+  },
 }
 </script>
